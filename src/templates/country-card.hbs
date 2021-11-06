@@ -1,0 +1,23 @@
+<div class='render-card'>
+  <h1 class='country-title'>{{nativeName}} ({{name}})</h1>
+  <div class='card'>
+    <div>
+      <p class='text'><span class='option'>Capital: </span>{{capital}}</p>
+      <p class='text'><span class='option'>Population: </span>{{population}}</p>
+      <p class='text'><span class='option'>Languages: </span></p>
+      <ul class='language-list'>
+        {{#each languages}}
+          <li>
+            {{nativeName}}
+            ({{name}})
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <div>
+      <img src='{{flag}}' alt='{{name}}' width='200' height='150' />
+    </div>
+
+  </div>
+</div>
