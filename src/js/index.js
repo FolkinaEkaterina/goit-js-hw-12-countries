@@ -12,12 +12,14 @@ const refs = getRefs();
 refs.inputForm.addEventListener('input', debounce(onInputForm, 500));
 
 function onInputForm() {
-  const searchQuery = refs.inputForm.value;
-
-  if (!refs.inputForm.value) return markupList(0);
+  let searchQuery = refs.inputForm.value.trim();
+  if (!searchQuery) {
+    refs.cardContainer.innerHTML = '';
+    errorMessage('Error. Remove the space. Enter value');
+    return;
+  }
 
   if (!refs.inputForm.value.match(/^[a-zA-Z,() ']*$/)) {
-    markupList(0);
     return errorMessage('Use latinica (a-z)');
   }
 
@@ -28,20 +30,11 @@ function searchCountry(country) {
   let countryList = country.length;
 
   if (countryList === 1) {
-    markupList(countryCard(country[0]));
+    refs.cardContainer.innerHTML = countryCard(...country);
   } else if (countryList > 2 && countryList <= 10) {
-    markupList(countriesList(country));
+    refs.cardContainer.innerHTML = countriesList(country);
   } else if (countryList > 10) {
-    markupList(0);
     return errorMessage('Too many matches found. Please enter a more specific query!');
-  }
-}
-
-function markupList(markup) {
-  if (markup) {
-    refs.cardContainer.innerHTML = markup;
-  } else {
-    return (refs.cardContainer.innerHTML = '');
   }
 }
 
