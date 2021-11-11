@@ -35,7 +35,7 @@ function searchCountry(country) {
     refs.cardContainer.innerHTML = countriesList(country);
   } else if (countryList > 10) {
     return errorMessage('Too many matches found. Please enter a more specific query!');
-  }
+  } else onFetchError();
 }
 
 function onFetchError() {
